@@ -1,12 +1,13 @@
 import requests
 from datetime import datetime
+import os
 
 MY_SHEETY_ENDPOINT = (
     "https://api.sheety.co/5ec014ec8902336927c4400de70fa6b6/workoutTracking/workouts"
 )
 
-APP_ID = "APP ID"
-API_KEY = "API KEY"
+APP_ID = os.environ["NT_APP_ID"]
+API_KEY = os.environ["NT_API_KEY"]
 exercise_endpoint = (
     "https://trackapi.nutritionix.com/v2/natural/exercise"  # Accepts 'POST'
 )
@@ -41,7 +42,7 @@ for exercise in result["exercises"]:
         }
     }
 
-    bearer_headers = {"Authorization": f"Bearer {bearer}"}
+    bearer_headers = {"Authorization": f"Bearer {os.environ['TOKEN']}"}
     sheet_response = requests.post(
         MY_SHEETY_ENDPOINT, json=sheet_inputs, headers=bearer_headers
     )
